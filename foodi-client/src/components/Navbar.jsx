@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
+// ------
+import { motion, useAnimation } from "framer-motion";
 import logo from "/logo.png";
 import { FaRegUser } from "react-icons/fa";
 import Modal from "./Modal";
@@ -6,6 +8,13 @@ import Profile from "./Profile";
 import { Link } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import useAuth from "../hooks/useAuth";
+
+// const navItems = (
+//   <motion.ul initial={{ opacity: 0 }} animate={controls} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-64 space-y-3">
+//     {navItems}
+//   </motion.ul>
+// );
+
 
 const Navbar = () => {
   const [isSticky, setSticky] = useState(false);
@@ -29,7 +38,49 @@ const Navbar = () => {
     };
   }, []);
 
+
+
+
+
+
+
+//   <motion.header
+//   initial={{ y: -100, opacity: 0 }}
+//   animate={{ y: isSticky ? 0 : -100, opacity: isSticky ? 1 : 0 }}
+//   transition={{ duration: 0.3 }}
+//   className={`max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out`}
+// >
+//   <motion.div
+//     initial={{ opacity: 0 }}
+//     animate={{ opacity: isSticky ? 1 : 0 }}
+//     transition={{ duration: 0.3 }}
+//     className={`navbar xl:px-24 ${isSticky ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out" : ""}`}
+//   >
+//     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="navbar-start">
+//       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="dropdown justify-between">
+//         {/* ... rest of your code */}
+//       </motion.div>
+//       <motion.a initial={{ y: -20 }} animate={{ y: isSticky ? 0 : -20 }} href="/">
+//         <img src={logo} alt="" />
+//       </motion.a>
+//     </motion.div>
+//     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="navbar-center hidden lg:flex">
+//       <motion.ul initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="menu menu-horizontal px-1">
+//         {navItems}
+//       </motion.ul>
+//     </motion.div>
+//     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="navbar-end">
+//       {/* ... rest of your code */}
+//     </motion.div>
+//   </motion.div>
+// </motion.header>
+
+
+
+
+
   const navItems = (
+   
     <>
       <li>
         <a href="/" className="text-green">
@@ -72,6 +123,7 @@ const Navbar = () => {
         <a>Offers</a>
       </li>
     </>
+    
   );
   return (
     <header

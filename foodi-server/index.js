@@ -6,6 +6,9 @@ const mongoose = require("mongoose");
 const jwt = require('jsonwebtoken');
 require('dotenv').config()
 
+// This is your test secret API key.
+const stripe = require("stripe")(process.env.Stripe_Screat_Key);
+
 // middleware
 app.use(cors());
 app.use(express.json());
@@ -43,6 +46,36 @@ const userRoutes = require('./api/routes/userRoutes')
 app.use('/menu', menuRoutes)
 app.use('/carts', cartRoutes);
 app.use('/users', userRoutes);
+
+
+// stripe payments routes 
+app.post("/create-payment-intent", async (req, res) => {
+  const { price } = req.body;
+  const amount   = price*100;
+
+  // Create a PaymentIntent with the order amount and currency
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: amount,
+    currency: "inr",
+    "payment_method_types": [
+      "card"]
+      // "link"
+    ,
+
+
+    // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
+    // automatic_payment_methods: {
+    //   enabled: true,
+    // },
+  });
+
+  res.send({
+    clientSecret: paymentIntent.client_secret,
+  });
+});
+
+
+
 
 app.get("/", (req, res) => {
   res.send("Hello Foodi Client Server!");

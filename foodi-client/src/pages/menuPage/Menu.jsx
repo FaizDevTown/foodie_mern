@@ -7,21 +7,21 @@ import { FaFilter } from "react-icons/fa";
 const Menu = () => {
   const [menu, setMenu] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
-  const [menuss, setMenuss] = useState(arr);
+  // const [menuss, setMenuss] = useState(arr);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortOption, setSortOption] = useState("default");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8); // Number of items to display per page
 // console.log(menuss);
-  // useEffect(() => {
-  //   fetch("/menu.json")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       const specials = data.filter((item) => item.category === "popular");
-  //       console.log(specials)
-  //       setRecipes(specials);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch("/menu.json")
+      .then((res) => res.json())
+      .then((data) => {
+        const specials = data.filter((item) => item.category === "popular");
+        console.log(specials)
+        setRecipes(specials);
+      });
+  }, []);
 
   useEffect(() => {
     // Fetch data from the backend
